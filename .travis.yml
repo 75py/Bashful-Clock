@@ -1,0 +1,41 @@
+language: android
+
+env:
+  global:
+    - secure: "mvqMCa7W2F41sphpAu/17rRHNTYOjQscEWJR7dD3YtvDAoGp2IvIA2D76u9SbTbMcUJxZDv0pVJwhtY1RTwRNbKKoHIPLzeTfV6Llp4MMzm/VHzSeWPEEHSmKSZZbRGtJLO8lRstPaPu3/XIswG5aHuvCax1Nf/kw8cNft1CXjWyJvK8GmN5dFGdd0eqrTcSZOZivxPBtZcbzTdH/fSWSFepA1NkbmMbNBTtk1R9gNXpTZmikaNDhdAHUkXa3tvV2MHCGCGhmunuwWweo3A5JYFW/eHb+ewx7CV0PMfVAQ1tVmrN1tY0oeZniijjrd4pFQWjfiGn94cBwc5oqRnAYnHNOGAqlGhLO0oFt/OPIzbLDxDpNj3XE7VNN6gZUDsFtHqG7aTX6LcPp+ByI1VLfZMmjBB3SXV1A2tvXfRGkOWK1O4XkABdy2Icm6xh22ytD69SVxLQBbShbFtyVSTZzqsdTmyzWNsYCs3wFKp5sczUBTVhsgwS6QuqTmlbf00tjYCrK00Z9gDGdlJDQGAKN0yQtXMZEEsOv9QSnP83iGAqzuc7qiwRckhvBQtHq+PMpKwopLunNvVBzHpq0HAGDn74SaXyzyM65qk2C4n2DxHK5IBLaEPxbhdvb59MQaNJQH5KS7Ezga8/816puBWyakhpw1W0JRT2FXcSa/qajmg="
+    - secure: "YrQcE5aKzI+qClWMemiJYBN6DDsmsrSOvGLiyC4s/Vq6FTacFE7YwrrTpYetiTjAfWLU0uzfnvYNZdVmxCoPNI0B3K4YsknYVv4e18H5hTaO4roF41P6Md5D0X04OlVzBMQmKHqPdBRjFLKU26cQ19eodJzW3+861p2CPhj89clX8dNAQUXs8pMkdQg4UgGPpuN1QGFzDVzeljfXbH6M0d+XhNnw+eNvNCDY77KQuOjzFbaajHza/l4QpWyu8ftAyAwQCRY93ZmLzFaoSlK5/kirikvs6dlZK4/AUmav8E0U5E7p3gtWnuTye5qAzuBBrRr1mb/DAvUcdltDpOa3S0ViF0VJ2UK1FEClhFyMORrv+xNO8ITnovGCmlC0Z0Ibvt3LSuHm+e1agyYa1489PtzNCCS46jiRGut2I+YKzdI2ECfmTHk1IsawasrKWGg6BoYPNnJijbpqc/ph39tdqEk/nPYznQor1cB73F4CaOZgbI7J2WeFlBxxoIVBpQY8Zwhp0i9C4/EIMHbqI8PCU1Bd9p0+fYFV03ELc5KBgyxwZHB6WguYDseXeleBnZhemptbcSEP/qS3M1mI+GhwOOLXmDUBFiydFebgsz4Ulr81tJavjQ0tWluMuUYmJYYYTgoduasUW/q1Y6AyPHm/nP2V1hvdROEzwB8j/kMqalk="
+
+android:
+  components:
+    - tools
+    - platform-tools
+
+    # The BuildTools version used by your project
+    - build-tools-28.0.3
+
+    # The SDK version used to compile your project
+    - android-28
+
+    # Additional components
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+
+  licenses:
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+
+branches:
+  only:
+    - master
+
+before_install:
+    # https://stackoverflow.com/questions/52274229/travis-ci-android-28-licenses-have-not-been-accepted
+    - yes | sdkmanager "platforms;android-28"
+
+script:
+  - ./gradlew assembleDebug
+
+after_success:
+  - ./gradlew uploadDeployGateDebug

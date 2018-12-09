@@ -1,0 +1,42 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreference
+        android:defaultValue="@bool/pref_default_value_date_format_in_english"
+        android:key="@string/pref_key_date_format_in_english"
+        android:summary="@string/pref_description_date_format_in_english"
+        android:title="@string/pref_title_date_format_in_english"
+        app:iconSpaceReserved="false" />
+
+    <ListPreference
+        android:defaultValue="@string/pref_default_value_duration"
+        android:entries="@array/pref_entries_duration"
+        android:entryValues="@array/pref_entryValues_duration"
+        android:key="@string/pref_key_duration"
+        android:summary="@string/pref_description_duration"
+        android:title="@string/pref_title_duration"
+        app:iconSpaceReserved="false" />
+
+    <SwitchPreference
+        android:defaultValue="@bool/pref_default_value_fadeout"
+        android:key="@string/pref_key_fadeout"
+        android:title="@string/pref_title_fadeout"
+        app:iconSpaceReserved="false" />
+
+    <com.nagopy.android.bashfulclock.app.DateFormatListPreference
+        android:defaultValue="@string/pref_def_value_date_format"
+        android:entries="@array/pref_entries_date_format"
+        android:entryValues="@array/pref_entries_date_format"
+        android:key="@string/pref_key_date_format"
+        android:title="@string/pref_title_date_format"
+        app:iconSpaceReserved="false" />
+
+    <ListPreference
+        android:defaultValue="@string/pref_default_value_text_size"
+        android:entries="@array/pref_entries_text_size"
+        android:entryValues="@array/pref_entryValues_text_size"
+        android:key="@string/pref_key_text_size"
+        android:title="@string/pref_title_text_size"
+        app:iconSpaceReserved="false" />
+
+</PreferenceScreen>
