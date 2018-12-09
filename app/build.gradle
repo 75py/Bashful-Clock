@@ -36,6 +36,13 @@ android {
 deploygate {
     userName = System.getenv('DEPLOYGATE_USER_NAME')
     token = System.getenv('DEPLOYGATE_API_TOKEN')
+
+    apks {
+        debug {
+            def hash = 'git log -1 --oneline'.execute([], project.rootDir).in.text.trim()
+            message = hash
+        }
+    }
 }
 
 dependencies {
