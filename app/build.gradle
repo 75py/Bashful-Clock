@@ -1,11 +1,32 @@
+// Fabric Crashlytics
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        // These docs use an open ended version so that our plugin
+        // can be updated quickly in response to Android tooling updates
+
+        // We recommend changing it to the latest version from our changelog:
+        // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
+        classpath 'io.fabric.tools:gradle:1.25.3'
+    }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'deploygate'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
     defaultConfig {
         applicationId "com.nagopy.android.bashfulclock"
         minSdkVersion 21
@@ -13,6 +34,7 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [fabric_api_key: properties.getProperty("FABRIC_API_KEY", System.getenv("FABRIC_API_KEY"))]
     }
     buildTypes {
         debug {
@@ -61,6 +83,10 @@ dependencies {
     implementation "com.google.dagger:dagger-android:2.16"
     implementation "com.google.dagger:dagger-android-support:2.16"
     kapt "com.google.dagger:dagger-android-processor:2.16"
+
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
+        transitive = true
+    }
 
     testImplementation 'junit:junit:4.12'
     testImplementation "org.robolectric:robolectric:4.0"
