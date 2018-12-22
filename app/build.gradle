@@ -75,9 +75,6 @@ kapt {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    kapt  "com.android.databinding:compiler:3.1.4"
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -96,7 +93,7 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
         transitive = true
     }
-
+    implementation 'com.google.firebase:firebase-core:16.0.6'
 
     testImplementation 'junit:junit:4.12'
     testImplementation "org.robolectric:robolectric:4.0.2"
@@ -110,3 +107,5 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
+
+apply plugin: 'com.google.gms.google-services'
