@@ -97,7 +97,7 @@ class OverlayClock @Inject constructor(private val userSettings: UserSettings
         timerJob = GlobalScope.launch(Dispatchers.Main) {
             while (isActive) {
                 Timber.d("Timer job")
-                binding.clockTextView.text = dateFormatter.format(Date())
+                binding.text = dateFormatter.format(Date())
                 delay(1000)
             }
         }
