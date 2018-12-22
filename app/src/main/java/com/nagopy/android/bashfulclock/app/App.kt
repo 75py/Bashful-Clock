@@ -1,11 +1,13 @@
 package com.nagopy.android.bashfulclock.app
 
+import com.crashlytics.android.Crashlytics
 import com.nagopy.android.bashfulclock.AppComponent
 import com.nagopy.android.bashfulclock.BuildConfig
 import com.nagopy.android.bashfulclock.DaggerAppComponent
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
+import io.fabric.sdk.android.Fabric
 import timber.log.Timber
 
 class App : DaggerApplication() {
@@ -20,6 +22,7 @@ class App : DaggerApplication() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        Fabric.with(this, Crashlytics())
         OverlayViewManager.init(this)
     }
 
