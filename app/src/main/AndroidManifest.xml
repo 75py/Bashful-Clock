@@ -3,6 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.nagopy.android.bashfulclock">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
     <application
             android:name=".app.App"
             android:allowBackup="true"
