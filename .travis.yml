@@ -34,10 +34,9 @@ branches:
 before_install:
     # https://stackoverflow.com/questions/52274229/travis-ci-android-28-licenses-have-not-been-accepted
     - yes | sdkmanager "platforms;android-28"
-    - openssl aes-256-cbc -K $encrypted_2e4e4247709c_key -iv $encrypted_2e4e4247709c_iv -in google-services.json.enc -out ./app/google-services.json -d
-    - openssl aes-256-cbc -K $encrypted_2e4e4247709c_key -iv $encrypted_2e4e4247709c_iv -in google-play-credentials.json.enc -out google-play-credentials.json -d
-    - openssl aes-256-cbc -K $encrypted_2e4e4247709c_key -iv $encrypted_2e4e4247709c_iv -in release.keystore.enc -out release.keystore -d
-    - openssl aes-256-cbc -K $encrypted_2e4e4247709c_key -iv $encrypted_2e4e4247709c_iv -in release.gradle.enc -out release.gradle -d
+    - openssl aes-256-cbc -K $encrypted_2e4e4247709c_key -iv $encrypted_2e4e4247709c_iv -in secrets.tar.enc -out secrets.tar -d
+    - tar xvf secrets.tar
+    - mv google-services.json app/google-services.json
 
 before_script:
     - echo "FABRIC_API_KEY="$FABRIC_API_KEY >> local.properties

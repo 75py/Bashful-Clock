@@ -67,3 +67,4 @@ fastlane/readme.md
 google-play-credentials.json
 release.keystore
 release.gradle
+secrets.tar
