@@ -21,6 +21,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'deploygate'
 apply plugin: 'io.fabric'
 
+apply from: '../release.gradle', to: android
+
 android {
     compileSdkVersion 28
 
@@ -45,6 +47,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     signingConfigs {
