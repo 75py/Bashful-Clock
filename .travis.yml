@@ -36,7 +36,6 @@ before_install:
     - yes | sdkmanager "platforms;android-28"
     - openssl aes-256-cbc -K $encrypted_2e4e4247709c_key -iv $encrypted_2e4e4247709c_iv -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
-    - mv google-services.json app/google-services.json
 
 before_script:
     - echo "FABRIC_API_KEY="$FABRIC_API_KEY >> local.properties
