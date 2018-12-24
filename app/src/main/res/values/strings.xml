@@ -58,4 +58,6 @@
     <string name="notification_channel_name">Background Service</string>
     <string name="notification_channel_description">Detects unlock screen. This notification is necessary to operate in the background, but it can be hidden.</string>
     <string name="notification_content_text">Tap to change your settings.</string>
+
+    <string name="open_source_licenses">Open source licenses</string>
 </resources>

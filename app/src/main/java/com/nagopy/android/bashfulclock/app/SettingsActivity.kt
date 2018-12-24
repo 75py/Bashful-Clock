@@ -1,8 +1,12 @@
 package com.nagopy.android.bashfulclock.app
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.preference.PreferenceFragmentCompat
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.nagopy.android.bashfulclock.R
 import com.nagopy.android.bashfulclock.UserSettings
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
@@ -66,5 +70,20 @@ class SettingsActivity : DaggerAppCompatActivity(), SharedPreferences.OnSharedPr
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             addPreferencesFromResource(R.xml.pref_general)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_settings, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.open_source_license -> {
+                OssLicensesMenuActivity.setActivityTitle(getString(R.string.open_source_licenses))
+                startActivity(Intent(this, OssLicensesMenuActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
