@@ -18,10 +18,12 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.math.roundToLong
 
-class OverlayClock @Inject constructor(private val userSettings: UserSettings
-                                       , context: Context
-                                       , overlayViewManager: OverlayViewManager
-                                       , private val dateFormatter: DateFormatter) {
+class OverlayClock @Inject constructor(
+    private val userSettings: UserSettings
+    , context: Context
+    , overlayViewManager: OverlayViewManager
+    , private val dateFormatter: DateFormatter
+) {
 
     private val binding: OverlayClockBinding = OverlayClockBinding.inflate(LayoutInflater.from(context)).apply {
         when (userSettings.textSize) {
@@ -113,19 +115,16 @@ class OverlayClock @Inject constructor(private val userSettings: UserSettings
     private fun reserveFadeout() {
         Timber.v("reserveFadeout")
 
-        if (!userSettings.fadeOut) {
-            return
-        }
-
         fadeoutJob = GlobalScope.launch(Dispatchers.Main) {
             delay((userSettings.duration * 1000L).roundToLong())
-            if (isActive) {
+            if (isActive && userSettings.fadeOut) {
                 binding.clockTextView.startAnimation(alphaFadeout)
                 delay(1000)
-                if (isActive) {
-                    cancelTimer()
-                    clockView.hide()
-                }
+            }
+
+            if (isActive) {
+                cancelTimer()
+                clockView.hide()
             }
         }
     }
