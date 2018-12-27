@@ -42,10 +42,10 @@ before_script:
     - echo "FABRIC_API_KEY="$FABRIC_API_KEY >> local.properties
 
 script:
-  - ./gradlew assembleRelease
+  - ./gradlew assembleDevRelease
 
 after_success:
-  - ./gradlew uploadDeployGateRelease
+  - ./gradlew uploadDeployGateDevRelease
 
 deploy:
   skip_cleanup: true
