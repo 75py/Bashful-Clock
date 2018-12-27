@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import com.nagopy.android.bashfulclock.FirebaseAnalyticsWrapper
 import com.nagopy.android.bashfulclock.R
 import com.nagopy.android.bashfulclock.UserSettings
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
@@ -27,6 +28,9 @@ class SettingsActivity : DaggerAppCompatActivity(), SharedPreferences.OnSharedPr
 
     @Inject
     lateinit var userSettings: UserSettings
+
+    @Inject
+    lateinit var firebaseAnalyticsWrapper: FirebaseAnalyticsWrapper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +59,7 @@ class SettingsActivity : DaggerAppCompatActivity(), SharedPreferences.OnSharedPr
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        firebaseAnalyticsWrapper.sendSettingChangeEvent(sharedPreferences, key)
 
         if (overlayViewManager.canDrawOverlays() && userSettings.isUserSettingsKey(key)) {
             GlobalScope.launch(Dispatchers.Main) {

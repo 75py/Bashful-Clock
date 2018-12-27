@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.res.Resources
 import androidx.preference.PreferenceManager
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.nagopy.android.bashfulclock.app.App
 import com.nagopy.android.bashfulclock.app.DateFormatListPreference
 import com.nagopy.android.bashfulclock.app.MainService
@@ -39,6 +40,10 @@ class AppModule {
     @Singleton
     @Provides
     fun provideOverlayViewManager() = OverlayViewManager.getInstance()!!
+
+    @Singleton
+    @Provides
+    fun provideFirebaseAnalytics(application: App) = FirebaseAnalytics.getInstance(application)
 
 }
 
