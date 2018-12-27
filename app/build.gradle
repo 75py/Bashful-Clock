@@ -59,6 +59,15 @@ android {
             storePassword "android"
         }
     }
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            resConfigs "en", "ja"
+            applicationIdSuffix = ".dev"
+        }
+        pro {
+        }
+    }
     dataBinding {
         enabled = true
     }
