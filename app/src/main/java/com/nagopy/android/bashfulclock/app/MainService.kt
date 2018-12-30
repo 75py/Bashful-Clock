@@ -42,34 +42,40 @@ class MainService : DaggerService() {
         super.onCreate()
         Timber.d("onCreate()")
 
+        RemoteConfigService.requestFetch(this)
+
         registerReceiver(receiver, IntentFilter(Intent.ACTION_USER_PRESENT).apply {
             addAction(Intent.ACTION_SCREEN_OFF)
             addAction(ACTION_SHOW)
         })
 
         val channelId =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    createNotificationChannel()
-                } else {
-                    // If earlier version channel ID is not used
-                    // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
-                    ""
-                }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                createNotificationChannel()
+            } else {
+                // If earlier version channel ID is not used
+                // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
+                ""
+            }
 
         var n = NotificationCompat.Builder(this, channelId)
-                .setContentTitle(getText(R.string.app_name))
-                .setSmallIcon(R.drawable.ic_stat_default)
-                .setContentText(getText(R.string.notification_content_text))
-                .setPriority(NotificationCompat.PRIORITY_MIN)
-                .setContentIntent(PendingIntent.getActivity(this, 0,
-                        Intent(this, SettingsActivity::class.java)
-                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP),
-                        PendingIntent.FLAG_UPDATE_CURRENT))
+            .setContentTitle(getText(R.string.app_name))
+            .setSmallIcon(R.drawable.ic_stat_default)
+            .setContentText(getText(R.string.notification_content_text))
+            .setPriority(NotificationCompat.PRIORITY_MIN)
+            .setContentIntent(
+                PendingIntent.getActivity(
+                    this, 0,
+                    Intent(this, SettingsActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP),
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            )
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             n = n.setCategory(Notification.CATEGORY_SERVICE)
-                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         }
         startForeground(1, n.build())
     }

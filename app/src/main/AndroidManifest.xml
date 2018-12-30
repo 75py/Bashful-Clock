@@ -4,6 +4,7 @@
           package="com.nagopy.android.bashfulclock">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
             android:name=".app.App"
@@ -32,6 +33,8 @@
         <service
                 android:name=".app.MainService"
                 android:exported="false"/>
+        <service android:name=".app.RemoteConfigService"
+                 android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
 </manifest>
