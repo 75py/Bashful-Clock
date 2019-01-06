@@ -11,3 +11,12 @@
 -keepclassmembernames class kotlinx.** {
     volatile <fields>;
 }
+
+# Crashlytics 2.+
+-keep class com.crashlytics.** { *; }
+-keep class com.crashlytics.android.**
+-keepattributes SourceFile, LineNumberTable, *Annotation*
+-keep public class * extends java.lang.Exception
+
+# https://qwx.jp/android-class-not-found-exception/
+-keep class com.google.firebase.** { *; }

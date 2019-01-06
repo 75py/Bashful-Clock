@@ -4,11 +4,10 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.res.Resources
 import androidx.preference.PreferenceManager
+import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.nagopy.android.bashfulclock.app.App
-import com.nagopy.android.bashfulclock.app.DateFormatListPreference
-import com.nagopy.android.bashfulclock.app.MainService
-import com.nagopy.android.bashfulclock.app.SettingsActivity
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.nagopy.android.bashfulclock.app.*
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
 import dagger.Component
 import dagger.Module
@@ -35,7 +34,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideNotificationManager(application: App) = application.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    fun provideNotificationManager(application: App) =
+        application.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     @Singleton
     @Provides
@@ -44,6 +44,15 @@ class AppModule {
     @Singleton
     @Provides
     fun provideFirebaseAnalytics(application: App) = FirebaseAnalytics.getInstance(application)
+
+    @Singleton
+    @Provides
+    fun provideFirebaseRemoteConfig(application: App): FirebaseRemoteConfig {
+        if (FirebaseApp.getApps(application).isNullOrEmpty()) {
+            FirebaseApp.initializeApp(application)
+        }
+        return FirebaseRemoteConfig.getInstance()
+    }
 
 }
 
@@ -61,13 +70,18 @@ abstract class ServiceModule {
     @ContributesAndroidInjector
     abstract fun contributeMainService(): MainService
 
+    @ContributesAndroidInjector
+    abstract fun contributeRemoteConfigService(): RemoteConfigService
+
 }
 
 @Singleton
-@Component(modules = [
-    AndroidSupportInjectionModule::class, // これが必要
-    AppModule::class, ActivityModule::class, ServiceModule::class
-])
+@Component(
+    modules = [
+        AndroidSupportInjectionModule::class, // これが必要
+        AppModule::class, ActivityModule::class, ServiceModule::class
+    ]
+)
 interface AppComponent : AndroidInjector<App> {
     @Component.Builder
     abstract class Builder : AndroidInjector.Builder<App>()
