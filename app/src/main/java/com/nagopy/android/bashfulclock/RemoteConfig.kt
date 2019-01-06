@@ -2,6 +2,7 @@ package com.nagopy.android.bashfulclock
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import timber.log.Timber
 import javax.inject.Inject
@@ -58,9 +59,13 @@ class RemoteConfig @Inject constructor(private val firebaseRemoteConfig: Firebas
     }
 
     data class RemoteJapaneseEra(
+        @SerializedName("endTime")
         val endTime: Long,
+        @SerializedName("startYear")
         val startYear: Int,
+        @SerializedName("name")
         val name: String,
+        @SerializedName("shortName")
         val shortName: String
     )
 }
