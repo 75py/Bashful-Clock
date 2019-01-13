@@ -8,6 +8,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.nagopy.android.bashfulclock.app.*
+import com.nagopy.android.bashfulclock.infra.InfraModule
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
 import dagger.Component
 import dagger.Module
@@ -17,7 +18,7 @@ import dagger.android.ContributesAndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [InfraModule::class])
 class AppModule {
 
     @Singleton
@@ -30,7 +31,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideSharedPreferences(application: App) = PreferenceManager.getDefaultSharedPreferences(application)
+    fun provideSharedPreferences(application: App) = PreferenceManager.getDefaultSharedPreferences(application)!!
 
     @Singleton
     @Provides

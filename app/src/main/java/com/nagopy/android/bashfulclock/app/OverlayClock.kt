@@ -1,4 +1,4 @@
-package com.nagopy.android.bashfulclock
+package com.nagopy.android.bashfulclock.app
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,7 +8,10 @@ import android.view.*
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import androidx.core.widget.TextViewCompat
+import com.nagopy.android.bashfulclock.R
 import com.nagopy.android.bashfulclock.databinding.OverlayClockBinding
+import com.nagopy.android.bashfulclock.domain.dateformater.DateFormatter
+import com.nagopy.android.bashfulclock.domain.usersettings.UserSettings
 import com.nagopy.android.overlayviewmanager.DraggableOnTouchListener
 import com.nagopy.android.overlayviewmanager.OverlayView
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
@@ -28,13 +31,21 @@ class OverlayClock @Inject constructor(
     private val binding: OverlayClockBinding = OverlayClockBinding.inflate(LayoutInflater.from(context)).apply {
         when (userSettings.textSize) {
             userSettings.textSizeSmall ->
-                TextViewCompat.setTextAppearance(this.clockTextView, R.style.TextAppearance_AppCompat_Small)
+                TextViewCompat.setTextAppearance(this.clockTextView,
+                    R.style.TextAppearance_AppCompat_Small
+                )
             userSettings.textSizeMedium ->
-                TextViewCompat.setTextAppearance(this.clockTextView, R.style.TextAppearance_AppCompat_Medium)
+                TextViewCompat.setTextAppearance(this.clockTextView,
+                    R.style.TextAppearance_AppCompat_Medium
+                )
             userSettings.textSizeLarge ->
-                TextViewCompat.setTextAppearance(this.clockTextView, R.style.TextAppearance_AppCompat_Large)
+                TextViewCompat.setTextAppearance(this.clockTextView,
+                    R.style.TextAppearance_AppCompat_Large
+                )
             userSettings.textSizeExtraLarge -> {
-                TextViewCompat.setTextAppearance(this.clockTextView, R.style.TextAppearance_AppCompat_Large)
+                TextViewCompat.setTextAppearance(this.clockTextView,
+                    R.style.TextAppearance_AppCompat_Large
+                )
                 // getTextSize = px
                 // setTextSize = sp(default)
                 // this.clockTextView.textSize *= 1.1f NG!

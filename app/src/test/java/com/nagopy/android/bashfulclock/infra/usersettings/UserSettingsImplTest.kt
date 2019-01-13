@@ -1,4 +1,4 @@
-package com.nagopy.android.bashfulclock
+package com.nagopy.android.bashfulclock.infra.usersettings
 
 import android.app.Application
 import android.content.Context
@@ -6,14 +6,16 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.hamcrest.CoreMatchers.`is`
+import com.nagopy.android.bashfulclock.R
+import com.nagopy.android.bashfulclock.domain.usersettings.UserSettings
+import org.hamcrest.CoreMatchers
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class UserSettingsTest {
+class UserSettingsImplTest {
 
     lateinit var userSettings: UserSettings
 
@@ -22,44 +24,47 @@ class UserSettingsTest {
 
     @Before
     fun setUp() {
-        val app = ApplicationProvider.getApplicationContext<Application>()
+        val app = ApplicationProvider.getApplicationContext<Context>()
         sp = app.getSharedPreferences("test", Context.MODE_PRIVATE).apply {
             edit().clear().commit()
         }
         res = app.resources
-        userSettings = UserSettings(sp, res)
+        userSettings = UserSettingsImpl(sp, res)
     }
 
     @Test
     fun getInEnglish() {
-        Assert.assertThat(userSettings.inEnglish, `is`(false))
+        Assert.assertThat(userSettings.inEnglish, CoreMatchers.`is`(false))
 
         sp.edit().putBoolean(res.getString(R.string.pref_key_date_format_in_english), true).commit()
-        Assert.assertThat(userSettings.inEnglish, `is`(true))
+        Assert.assertThat(userSettings.inEnglish, CoreMatchers.`is`(true))
     }
 
     @Test
     fun getDuration() {
-        Assert.assertThat(userSettings.duration, `is`("4.0".toFloat()))
+        Assert.assertThat(userSettings.duration, CoreMatchers.`is`("4.0".toFloat()))
 
         sp.edit().putString(res.getString(R.string.pref_key_duration), "3.0").commit()
-        Assert.assertThat(userSettings.duration, `is`("3.0".toFloat()))
+        Assert.assertThat(userSettings.duration, CoreMatchers.`is`("3.0".toFloat()))
     }
 
     @Test
     fun getDateFormat() {
-        Assert.assertThat(userSettings.dateFormat, `is`(res.getString(R.string.pref_def_value_date_format)))
+        Assert.assertThat(
+            userSettings.dateFormat,
+            CoreMatchers.`is`(res.getString(R.string.pref_def_value_date_format))
+        )
 
         sp.edit().putString(res.getString(R.string.pref_key_date_format), "foo").commit()
-        Assert.assertThat(userSettings.dateFormat, `is`("foo"))
+        Assert.assertThat(userSettings.dateFormat, CoreMatchers.`is`("foo"))
     }
 
     @Test
     fun getFadeOut() {
-        Assert.assertThat(userSettings.fadeOut, `is`(true))
+        Assert.assertThat(userSettings.fadeOut, CoreMatchers.`is`(true))
 
         sp.edit().putBoolean(res.getString(R.string.pref_key_fadeout), false).commit()
-        Assert.assertThat(userSettings.fadeOut, `is`(false))
+        Assert.assertThat(userSettings.fadeOut, CoreMatchers.`is`(false))
     }
 
     @Test

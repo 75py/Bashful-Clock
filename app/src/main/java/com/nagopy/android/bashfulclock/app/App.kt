@@ -4,7 +4,7 @@ import com.crashlytics.android.Crashlytics
 import com.nagopy.android.bashfulclock.AppComponent
 import com.nagopy.android.bashfulclock.BuildConfig
 import com.nagopy.android.bashfulclock.DaggerAppComponent
-import com.nagopy.android.bashfulclock.RemoteConfig
+import com.nagopy.android.bashfulclock.infra.remoteconfig.RemoteConfig
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication

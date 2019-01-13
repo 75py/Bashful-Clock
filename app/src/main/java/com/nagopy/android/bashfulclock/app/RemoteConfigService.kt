@@ -9,7 +9,7 @@ import android.content.Context
 import android.os.Build
 import androidx.core.content.ContextCompat
 import com.nagopy.android.bashfulclock.BuildConfig
-import com.nagopy.android.bashfulclock.RemoteConfig
+import com.nagopy.android.bashfulclock.infra.remoteconfig.RemoteConfig
 import dagger.android.AndroidInjection
 import timber.log.Timber
 import javax.inject.Inject
