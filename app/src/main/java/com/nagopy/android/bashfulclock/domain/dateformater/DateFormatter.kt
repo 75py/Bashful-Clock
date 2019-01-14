@@ -1,7 +1,10 @@
-package com.nagopy.android.bashfulclock
+package com.nagopy.android.bashfulclock.domain.dateformater
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import androidx.core.os.ConfigurationCompat
+import com.nagopy.android.bashfulclock.domain.japaneseera.JapaneseEraRepository
+import com.nagopy.android.bashfulclock.domain.usersettings.UserSettings
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -9,7 +12,7 @@ import javax.inject.Inject
 class DateFormatter @Inject constructor(
     private val userSettings: UserSettings
     , private val context: Context
-    , private val japaneseEra: JapaneseEra
+    , private val japaneseEraRepository: JapaneseEraRepository
 ) {
 
     private val df = SimpleDateFormat(
@@ -29,15 +32,16 @@ class DateFormatter @Inject constructor(
         return formatJapaneseEra(tdf.format(date), date)
     }
 
-    private fun formatJapaneseEra(formattedStr: String, date: Date): String {
+    @VisibleForTesting
+    fun formatJapaneseEra(formattedStr: String, date: Date): String {
         return when {
             formattedStr.contains("和暦長") -> {
-                val jpEra = japaneseEra.formatLong(date)
-                formattedStr.replace("和暦長", jpEra)
+                val jpEra = japaneseEraRepository.getCurrentJapaneseEra(date)
+                formattedStr.replace("和暦長", jpEra?.formatLong(date) ?: "")
             }
             formattedStr.contains("和暦短") -> {
-                val jpEra = japaneseEra.formatShort(date)
-                formattedStr.replace("和暦短", jpEra)
+                val jpEra = japaneseEraRepository.getCurrentJapaneseEra(date)
+                formattedStr.replace("和暦短", jpEra?.formatShort(date) ?: "")
             }
             else -> formattedStr
         }

@@ -1,8 +1,7 @@
-package com.nagopy.android.bashfulclock
+package com.nagopy.android.bashfulclock.infra.remoteconfig
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.gson.Gson
-import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import timber.log.Timber
 import javax.inject.Inject
@@ -38,16 +37,16 @@ class RemoteConfig @Inject constructor(private val firebaseRemoteConfig: Firebas
     }
 
 
-    fun getJapaneseEraConfig(): Collection<RemoteJapaneseEra> {
+    fun getJapaneseEraConfig(): Collection<RemoteConfigJapaneseEra> {
         val json = firebaseRemoteConfig.getString(KEY_JAPANESE_ERA)
         @Suppress("UNCHECKED_CAST")
-        val cachedObj = cache[json] as? Collection<RemoteJapaneseEra>
+        val cachedObj = cache[json] as? Collection<RemoteConfigJapaneseEra>
         return if (cachedObj != null) {
             cachedObj
         } else {
-            val obj: Collection<RemoteJapaneseEra> = Gson().fromJson(
+            val obj: Collection<RemoteConfigJapaneseEra> = Gson().fromJson(
                 json,
-                object : TypeToken<Collection<RemoteJapaneseEra>>() {}.type
+                object : TypeToken<Collection<RemoteConfigJapaneseEra>>() {}.type
             )
             cache[json] = obj
             obj
@@ -58,14 +57,5 @@ class RemoteConfig @Inject constructor(private val firebaseRemoteConfig: Firebas
         const val KEY_JAPANESE_ERA = "japanese_era"
     }
 
-    data class RemoteJapaneseEra(
-        @SerializedName("endTime")
-        val endTime: Long,
-        @SerializedName("startYear")
-        val startYear: Int,
-        @SerializedName("name")
-        val name: String,
-        @SerializedName("shortName")
-        val shortName: String
-    )
 }
+

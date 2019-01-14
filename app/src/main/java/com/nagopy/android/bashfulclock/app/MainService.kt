@@ -14,7 +14,6 @@ import android.os.IBinder
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import com.nagopy.android.bashfulclock.OverlayClock
 import com.nagopy.android.bashfulclock.R
 import dagger.android.DaggerService
 import timber.log.Timber
