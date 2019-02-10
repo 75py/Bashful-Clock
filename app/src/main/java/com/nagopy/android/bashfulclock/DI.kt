@@ -8,7 +8,9 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.nagopy.android.bashfulclock.analytics.Analytics
 import com.nagopy.android.bashfulclock.analytics.AnalyticsComponent
+import com.nagopy.android.bashfulclock.analytics.RemoteConfigComponent
 import com.nagopy.android.bashfulclock.app.*
+import com.nagopy.android.bashfulclock.data.remoteconfig.RemoteConfig
 import com.nagopy.android.bashfulclock.infra.InfraModule
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
 import dagger.Component
@@ -32,7 +34,20 @@ object AnalyticsComponentModule {
     }
 }
 
-@Module(includes = [InfraModule::class, AnalyticsComponentModule::class])
+@Module
+object RemoteConfigComponentModule {
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideRemoteConfig(context: Context): RemoteConfig {
+        return RemoteConfigComponent.builder()
+            .context(context)
+            .build()
+            .remoteConfig()
+    }
+}
+
+@Module(includes = [InfraModule::class, AnalyticsComponentModule::class, RemoteConfigComponentModule::class])
 class AppModule {
 
     @Singleton
