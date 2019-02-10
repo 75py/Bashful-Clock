@@ -8,8 +8,8 @@ import android.view.MenuItem
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.nagopy.android.bashfulclock.R
+import com.nagopy.android.bashfulclock.analytics.Analytics
 import com.nagopy.android.bashfulclock.domain.usersettings.UserSettings
-import com.nagopy.android.bashfulclock.infra.analytics.Analytics
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.Dispatchers

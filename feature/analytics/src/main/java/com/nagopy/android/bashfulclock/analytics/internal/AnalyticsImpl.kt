@@ -1,13 +1,14 @@
-package com.nagopy.android.bashfulclock.infra.analytics
+package com.nagopy.android.bashfulclock.analytics.internal
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.nagopy.android.bashfulclock.analytics.Analytics
 import javax.inject.Inject
 
-class Analytics @Inject constructor(private val firebaseAnalytics: FirebaseAnalytics) {
+internal class AnalyticsImpl @Inject constructor(private val firebaseAnalytics: FirebaseAnalytics) : Analytics {
 
-    fun sendSettingChangeEvent(sharedPreferences: SharedPreferences?, key: String?) {
+    override fun sendSettingChangeEvent(sharedPreferences: SharedPreferences?, key: String?) {
         val changedValue = sharedPreferences?.all?.get(key)
         changedValue?.let {
             firebaseAnalytics.logEvent("setting_changed", Bundle().apply {

@@ -5,8 +5,9 @@ import android.content.Context
 import android.content.res.Resources
 import androidx.preference.PreferenceManager
 import com.google.firebase.FirebaseApp
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.nagopy.android.bashfulclock.analytics.Analytics
+import com.nagopy.android.bashfulclock.analytics.AnalyticsComponent
 import com.nagopy.android.bashfulclock.app.*
 import com.nagopy.android.bashfulclock.infra.InfraModule
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
@@ -18,7 +19,20 @@ import dagger.android.ContributesAndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
-@Module(includes = [InfraModule::class])
+@Module
+object AnalyticsComponentModule {
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideAnalytics(context: Context): Analytics {
+        return AnalyticsComponent.builder()
+            .context(context)
+            .build()
+            .analytics()
+    }
+}
+
+@Module(includes = [InfraModule::class, AnalyticsComponentModule::class])
 class AppModule {
 
     @Singleton
@@ -41,10 +55,6 @@ class AppModule {
     @Singleton
     @Provides
     fun provideOverlayViewManager() = OverlayViewManager.getInstance()!!
-
-    @Singleton
-    @Provides
-    fun provideFirebaseAnalytics(application: App) = FirebaseAnalytics.getInstance(application)
 
     @Singleton
     @Provides
