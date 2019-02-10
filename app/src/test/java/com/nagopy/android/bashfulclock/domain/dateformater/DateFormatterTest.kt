@@ -3,8 +3,8 @@ package com.nagopy.android.bashfulclock.domain.dateformater
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.nagopy.android.bashfulclock.domain.japaneseera.JapaneseEra
-import com.nagopy.android.bashfulclock.domain.japaneseera.JapaneseEraRepository
+import com.nagopy.android.bashfulclock.japaneseera.JapaneseEra
+import com.nagopy.android.bashfulclock.japaneseera.JapaneseEraRepository
 import com.nagopy.android.bashfulclock.domain.usersettings.UserSettings
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue

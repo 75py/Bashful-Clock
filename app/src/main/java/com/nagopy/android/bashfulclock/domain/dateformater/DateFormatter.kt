@@ -3,7 +3,7 @@ package com.nagopy.android.bashfulclock.domain.dateformater
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.core.os.ConfigurationCompat
-import com.nagopy.android.bashfulclock.domain.japaneseera.JapaneseEraRepository
+import com.nagopy.android.bashfulclock.japaneseera.JapaneseEraRepository
 import com.nagopy.android.bashfulclock.domain.usersettings.UserSettings
 import java.text.SimpleDateFormat
 import java.util.*

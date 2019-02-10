@@ -109,6 +109,7 @@ repositories {
 dependencies {
     implementation project(":feature:analytics")
     implementation project(":data:remoteconfig")
+    implementation project(":domain:japaneseera")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.0'

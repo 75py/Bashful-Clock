@@ -12,6 +12,8 @@ import com.nagopy.android.bashfulclock.analytics.RemoteConfigComponent
 import com.nagopy.android.bashfulclock.app.*
 import com.nagopy.android.bashfulclock.data.remoteconfig.RemoteConfig
 import com.nagopy.android.bashfulclock.infra.InfraModule
+import com.nagopy.android.bashfulclock.japaneseera.JapaneseEraComponent
+import com.nagopy.android.bashfulclock.japaneseera.JapaneseEraRepository
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
 import dagger.Component
 import dagger.Module
@@ -47,7 +49,20 @@ object RemoteConfigComponentModule {
     }
 }
 
-@Module(includes = [InfraModule::class, AnalyticsComponentModule::class, RemoteConfigComponentModule::class])
+@Module(includes = [RemoteConfigComponentModule::class])
+object JapaneseEraRepositoryComponentModule {
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideJapaneseEraRepository(remoteConfig: RemoteConfig): JapaneseEraRepository {
+        return JapaneseEraComponent.builder()
+            .remoteConfig(remoteConfig)
+            .build()
+            .japaneseEraRepository()
+    }
+}
+
+@Module(includes = [InfraModule::class, AnalyticsComponentModule::class, RemoteConfigComponentModule::class, JapaneseEraRepositoryComponentModule::class])
 class AppModule {
 
     @Singleton

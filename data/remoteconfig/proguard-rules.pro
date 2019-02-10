@@ -19,3 +19,14 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# https://github.com/Kotlin/kotlinx.serialization
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.SerializationKt
+-keep,includedescriptorclasses class com.nagopy.android.bashfulclock.data.remoteconfig.**$$serializer { *; }
+-keepclassmembers class com.nagopy.android.bashfulclock.data.remoteconfig.** {
+    *** Companion;
+}
+-keepclasseswithmembers class com.nagopy.android.bashfulclock.data.remoteconfig.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
