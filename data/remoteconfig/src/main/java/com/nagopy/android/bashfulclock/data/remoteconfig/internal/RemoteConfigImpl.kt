@@ -16,7 +16,7 @@ internal class RemoteConfigImpl @Inject constructor(private val firebaseRemoteCo
         firebaseRemoteConfig.setDefaults(HashMap<String, Any>().apply {
             put(
                 KEY_JAPANESE_ERA,
-                "[{\"endTime\":1556636399999,\"startYear\":1989,\"name\":\"平成\",\"shortName\":\"H\"}]"
+                "{\"eras\":[{\"endTime\":1556636399999,\"startYear\":1989,\"name\":\"平成\",\"shortName\":\"H\"}]}"
             )
         })
     }
