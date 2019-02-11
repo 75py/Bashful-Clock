@@ -2,7 +2,6 @@ package com.nagopy.android.bashfulclock
 
 import android.app.NotificationManager
 import android.content.Context
-import android.content.res.Resources
 import androidx.preference.PreferenceManager
 import com.nagopy.android.bashfulclock.analytics.Analytics
 import com.nagopy.android.bashfulclock.analytics.AnalyticsComponent
@@ -109,10 +108,6 @@ class AppModule {
     @Singleton
     @Provides
     fun provideContext(application: App): Context = application
-
-    @Singleton
-    @Provides
-    fun provideResources(application: App): Resources = application.resources
 
     @Singleton
     @Provides
