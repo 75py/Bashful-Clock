@@ -1,4 +1,4 @@
-package com.nagopy.android.bashfulclock.domain.japaneseera
+package com.nagopy.android.bashfulclock.japaneseera
 
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe

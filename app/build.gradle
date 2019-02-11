@@ -105,7 +105,6 @@ repositories {
     }
 }
 
-
 dependencies {
     implementation project(":feature:analytics")
     implementation project(":data:remoteconfig")
