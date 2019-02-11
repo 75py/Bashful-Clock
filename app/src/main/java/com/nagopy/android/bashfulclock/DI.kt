@@ -4,11 +4,17 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.res.Resources
 import androidx.preference.PreferenceManager
-import com.google.firebase.FirebaseApp
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.nagopy.android.bashfulclock.analytics.Analytics
+import com.nagopy.android.bashfulclock.analytics.AnalyticsComponent
+import com.nagopy.android.bashfulclock.analytics.RemoteConfigComponent
 import com.nagopy.android.bashfulclock.app.*
-import com.nagopy.android.bashfulclock.infra.InfraModule
+import com.nagopy.android.bashfulclock.data.remoteconfig.RemoteConfig
+import com.nagopy.android.bashfulclock.datestr.DateFormatter
+import com.nagopy.android.bashfulclock.datestr.DateStrComponent
+import com.nagopy.android.bashfulclock.japaneseera.JapaneseEraComponent
+import com.nagopy.android.bashfulclock.japaneseera.JapaneseEraRepository
+import com.nagopy.android.bashfulclock.usersettings.UserSettings
+import com.nagopy.android.bashfulclock.usersettings.UserSettingsComponent
 import com.nagopy.android.overlayviewmanager.OverlayViewManager
 import dagger.Component
 import dagger.Module
@@ -18,7 +24,86 @@ import dagger.android.ContributesAndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
-@Module(includes = [InfraModule::class])
+@Module
+object AnalyticsComponentModule {
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideAnalytics(context: Context): Analytics {
+        return AnalyticsComponent.builder()
+            .context(context)
+            .build()
+            .analytics()
+    }
+}
+
+@Module
+object RemoteConfigComponentModule {
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideRemoteConfig(context: Context): RemoteConfig {
+        return RemoteConfigComponent.builder()
+            .context(context)
+            .build()
+            .remoteConfig()
+    }
+}
+
+@Module(includes = [RemoteConfigComponentModule::class])
+object JapaneseEraRepositoryComponentModule {
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideJapaneseEraRepository(remoteConfig: RemoteConfig): JapaneseEraRepository {
+        return JapaneseEraComponent.builder()
+            .remoteConfig(remoteConfig)
+            .build()
+            .japaneseEraRepository()
+    }
+}
+
+@Module
+object UserSettingsComponentModule {
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideUserSettings(context: Context): UserSettings {
+        return UserSettingsComponent.builder()
+            .context(context)
+            .build()
+            .userSettings()
+    }
+}
+
+@Module(includes = [UserSettingsComponentModule::class, JapaneseEraRepositoryComponentModule::class])
+object DateStrComponentModule {
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideDateFormatter(
+        context: Context,
+        userSettings: UserSettings,
+        japaneseEraRepository: JapaneseEraRepository
+    ): DateFormatter {
+        return DateStrComponent.builder()
+            .context(context)
+            .userSettings(userSettings)
+            .japaneseEraRepository(japaneseEraRepository)
+            .build()
+            .dateFormatter()
+    }
+}
+
+@Module(
+    includes = [
+        AnalyticsComponentModule::class,
+        RemoteConfigComponentModule::class,
+        JapaneseEraRepositoryComponentModule::class,
+        UserSettingsComponentModule::class,
+        DateStrComponentModule::class
+    ]
+)
 class AppModule {
 
     @Singleton
@@ -41,19 +126,6 @@ class AppModule {
     @Singleton
     @Provides
     fun provideOverlayViewManager() = OverlayViewManager.getInstance()!!
-
-    @Singleton
-    @Provides
-    fun provideFirebaseAnalytics(application: App) = FirebaseAnalytics.getInstance(application)
-
-    @Singleton
-    @Provides
-    fun provideFirebaseRemoteConfig(application: App): FirebaseRemoteConfig {
-        if (FirebaseApp.getApps(application).isNullOrEmpty()) {
-            FirebaseApp.initializeApp(application)
-        }
-        return FirebaseRemoteConfig.getInstance()
-    }
 
 }
 

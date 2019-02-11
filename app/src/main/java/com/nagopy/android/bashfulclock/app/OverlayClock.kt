@@ -10,8 +10,8 @@ import android.view.animation.Animation
 import androidx.core.widget.TextViewCompat
 import com.nagopy.android.bashfulclock.R
 import com.nagopy.android.bashfulclock.databinding.OverlayClockBinding
-import com.nagopy.android.bashfulclock.domain.dateformater.DateFormatter
-import com.nagopy.android.bashfulclock.domain.usersettings.UserSettings
+import com.nagopy.android.bashfulclock.datestr.DateFormatter
+import com.nagopy.android.bashfulclock.usersettings.UserSettings
 import com.nagopy.android.overlayviewmanager.DraggableOnTouchListener
 import com.nagopy.android.overlayviewmanager.OverlayView
 import com.nagopy.android.overlayviewmanager.OverlayViewManager

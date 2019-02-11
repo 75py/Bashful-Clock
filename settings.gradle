@@ -1,1 +1,6 @@
-include ':app'
+include ':app', ':datestr',
+        ':domain:analytics',
+        ':domain:japaneseera',
+        ':domain:usersettings',
+        ':domain:datestr',
+        ':data:remoteconfig'
