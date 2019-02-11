@@ -4,8 +4,6 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.res.Resources
 import androidx.preference.PreferenceManager
-import com.google.firebase.FirebaseApp
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.nagopy.android.bashfulclock.analytics.Analytics
 import com.nagopy.android.bashfulclock.analytics.AnalyticsComponent
 import com.nagopy.android.bashfulclock.analytics.RemoteConfigComponent
@@ -128,15 +126,6 @@ class AppModule {
     @Singleton
     @Provides
     fun provideOverlayViewManager() = OverlayViewManager.getInstance()!!
-
-    @Singleton
-    @Provides
-    fun provideFirebaseRemoteConfig(application: App): FirebaseRemoteConfig {
-        if (FirebaseApp.getApps(application).isNullOrEmpty()) {
-            FirebaseApp.initializeApp(application)
-        }
-        return FirebaseRemoteConfig.getInstance()
-    }
 
 }
 
