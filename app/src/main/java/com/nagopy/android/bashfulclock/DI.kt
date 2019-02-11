@@ -148,11 +148,19 @@ abstract class ServiceModule {
 
 }
 
+@Module
+abstract class BroadcastReceiverModule {
+
+    @ContributesAndroidInjector
+    abstract fun contributeBootCompletedReceiver(): BootCompletedReceiver
+
+}
+
 @Singleton
 @Component(
     modules = [
         AndroidSupportInjectionModule::class, // これが必要
-        AppModule::class, ActivityModule::class, ServiceModule::class
+        AppModule::class, ActivityModule::class, ServiceModule::class, BroadcastReceiverModule::class
     ]
 )
 interface AppComponent : AndroidInjector<App> {
