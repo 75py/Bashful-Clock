@@ -11,6 +11,8 @@ import com.nagopy.android.bashfulclock.analytics.AnalyticsComponent
 import com.nagopy.android.bashfulclock.analytics.RemoteConfigComponent
 import com.nagopy.android.bashfulclock.app.*
 import com.nagopy.android.bashfulclock.data.remoteconfig.RemoteConfig
+import com.nagopy.android.bashfulclock.datestr.DateFormatter
+import com.nagopy.android.bashfulclock.datestr.DateStrComponent
 import com.nagopy.android.bashfulclock.japaneseera.JapaneseEraComponent
 import com.nagopy.android.bashfulclock.japaneseera.JapaneseEraRepository
 import com.nagopy.android.bashfulclock.usersettings.UserSettings
@@ -76,12 +78,32 @@ object UserSettingsComponentModule {
     }
 }
 
+@Module(includes = [UserSettingsComponentModule::class, JapaneseEraRepositoryComponentModule::class])
+object DateStrComponentModule {
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideDateFormatter(
+        context: Context,
+        userSettings: UserSettings,
+        japaneseEraRepository: JapaneseEraRepository
+    ): DateFormatter {
+        return DateStrComponent.builder()
+            .context(context)
+            .userSettings(userSettings)
+            .japaneseEraRepository(japaneseEraRepository)
+            .build()
+            .dateFormatter()
+    }
+}
+
 @Module(
     includes = [
         AnalyticsComponentModule::class,
         RemoteConfigComponentModule::class,
         JapaneseEraRepositoryComponentModule::class,
-        UserSettingsComponentModule::class
+        UserSettingsComponentModule::class,
+        DateStrComponentModule::class
     ]
 )
 class AppModule {

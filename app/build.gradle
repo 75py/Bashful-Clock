@@ -109,6 +109,7 @@ dependencies {
     implementation project(":domain:analytics")
     implementation project(":domain:japaneseera")
     implementation project(':domain:usersettings')
+    implementation project(':domain:datestr')
     implementation project(":data:remoteconfig")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

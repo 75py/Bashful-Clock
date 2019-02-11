@@ -1,4 +1,4 @@
-package com.nagopy.android.bashfulclock.domain.dateformater
+package com.nagopy.android.bashfulclock.datestr.internal
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
@@ -20,7 +20,7 @@ import org.mockito.MockitoAnnotations
 import java.text.SimpleDateFormat
 
 @RunWith(AndroidJUnit4::class)
-class DateFormatterTest {
+class DateFormatterImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     lateinit var userSettings: UserSettings
@@ -28,7 +28,7 @@ class DateFormatterTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     lateinit var japaneseEraRepository: JapaneseEraRepository
 
-    lateinit var dateFormatter: DateFormatter
+    lateinit var dateFormatter: DateFormatterImpl
 
     @Before
     fun setUp() {
@@ -42,7 +42,7 @@ class DateFormatterTest {
         val context = ApplicationProvider.getApplicationContext<Context>()
         assertThat(context, `is`(notNullValue()))
 
-        dateFormatter = DateFormatter(userSettings, context, japaneseEraRepository)
+        dateFormatter = DateFormatterImpl(userSettings, context, japaneseEraRepository)
     }
 
     @Test
