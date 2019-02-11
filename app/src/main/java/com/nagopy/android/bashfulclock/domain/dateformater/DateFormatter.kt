@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.core.os.ConfigurationCompat
 import com.nagopy.android.bashfulclock.japaneseera.JapaneseEraRepository
-import com.nagopy.android.bashfulclock.domain.usersettings.UserSettings
+import com.nagopy.android.bashfulclock.usersettings.UserSettings
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject

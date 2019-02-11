@@ -1,1 +1,1 @@
-include ':app', ':feature:analytics', ':data:remoteconfig', ':domain:japaneseera'
+include ':app', ':feature:analytics', ':data:remoteconfig', ':domain:japaneseera', ':domain:usersettings'

@@ -1,13 +1,12 @@
-package com.nagopy.android.bashfulclock.infra.usersettings
+package com.nagopy.android.bashfulclock.usersettings.internal
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.nagopy.android.bashfulclock.R
-import com.nagopy.android.bashfulclock.domain.usersettings.UserSettings
+import com.nagopy.android.bashfulclock.usersettings.R
+import com.nagopy.android.bashfulclock.usersettings.UserSettings
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
 import org.junit.Before

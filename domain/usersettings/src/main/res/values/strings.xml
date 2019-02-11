@@ -1,0 +1,38 @@
+<resources>
+    <string name="pref_key_date_format_in_english" translatable="false">date_format_in_english</string>
+    <bool name="pref_default_value_date_format_in_english">false</bool>
+
+    <string name="pref_key_duration" translatable="false">duration</string>
+    <string name="pref_entryValues_duration_long" translatable="false">4.0</string>
+    <string-array name="pref_entryValues_duration">
+        <item>@string/pref_entryValues_duration_long</item>
+        <item>2.0</item>
+    </string-array>
+    <string name="pref_default_value_duration" translatable="false">@string/pref_entryValues_duration_long</string>
+
+    <string name="pref_key_fadeout" translatable="false">fadeout</string>
+    <bool name="pref_default_value_fadeout">true</bool>
+
+    <string name="pref_key_date_format" translatable="false">date_format</string>
+    <string name="pref_def_value_date_format">yyyy/MM/dd(E) HH:mm:ss</string>
+    <string-array name="pref_entries_date_format">
+        <item>@string/pref_def_value_date_format</item>
+        <item>yy/MM/dd HH:mm:ss</item>
+        <item>yyyy/MM/dd(E)\nHH:mm:ss</item>
+        <item>yyyy/MM/dd(E)\n和暦長\nHH:mm:ss</item>
+        <item>yyyy(和暦短) MM/dd(E)\nHH:mm:ss</item>
+    </string-array>
+
+    <string name="pref_key_text_size" translatable="false">text_size</string>
+    <string name="pref_entryValues_text_size_small" translatable="false">small</string>
+    <string name="pref_entryValues_text_size_medium" translatable="false">medium</string>
+    <string name="pref_entryValues_text_size_large" translatable="false">large</string>
+    <string name="pref_entryValues_text_size_xlarge" translatable="false">xlarge</string>
+    <string-array name="pref_entryValues_text_size">
+        <item>@string/pref_entryValues_text_size_small</item>
+        <item>@string/pref_entryValues_text_size_medium</item>
+        <item>@string/pref_entryValues_text_size_large</item>
+        <item>@string/pref_entryValues_text_size_xlarge</item>
+    </string-array>
+    <string name="pref_default_value_text_size" translatable="false">@string/pref_entryValues_text_size_medium</string>
+</resources>

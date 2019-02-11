@@ -1,11 +1,10 @@
-package com.nagopy.android.bashfulclock.infra.usersettings
+package com.nagopy.android.bashfulclock.usersettings.internal
 
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
-import com.nagopy.android.bashfulclock.R
-import com.nagopy.android.bashfulclock.domain.usersettings.UserSettings
-import timber.log.Timber
+import com.nagopy.android.bashfulclock.usersettings.R
+import com.nagopy.android.bashfulclock.usersettings.UserSettings
 import javax.inject.Inject
 
 class UserSettingsImpl @Inject constructor(
@@ -66,21 +65,21 @@ class UserSettingsImpl @Inject constructor(
 
     private var verticalY: Int
         get() {
-            Timber.d("getVerticalY()")
+//            Timber.d("getVerticalY()")
             return sharedPreferences.getInt(KEY_VERTICAL_Y, 100)
         }
         set(value) {
-            Timber.d("setVerticalY()")
+//            Timber.d("setVerticalY()")
             sharedPreferences.edit().putInt(KEY_VERTICAL_Y, value).apply()
         }
 
     private var horizontalY: Int
         get() {
-            Timber.d("getHorizontalY()")
+//            Timber.d("getHorizontalY()")
             return sharedPreferences.getInt(KEY_HORIZONTAL_Y, 100)
         }
         set(value) {
-            Timber.d("setHorizontalY()")
+//            Timber.d("setHorizontalY()")
             sharedPreferences.edit().putInt(KEY_HORIZONTAL_Y, value).apply()
         }
 
