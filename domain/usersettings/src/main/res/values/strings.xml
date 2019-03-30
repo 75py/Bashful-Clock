@@ -24,7 +24,7 @@
 
     <string name="pref_title_date_format">Date format</string>
     <string name="pref_key_date_format" translatable="false">date_format</string>
-    <string name="pref_def_value_date_format">yyyy/MM/dd(E) HH:mm:ss</string>
+    <string name="pref_def_value_date_format" translatable="false">yyyy/MM/dd(E) HH:mm:ss</string>
     <string-array name="pref_entries_date_format">
         <item>@string/pref_def_value_date_format</item>
         <item>yy/MM/dd HH:mm:ss</item>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_title_date_format_in_english">英語表記にする</string>
+    <string name="pref_description_date_format_in_english">曜日等を英語で表示します。</string>
+    <string name="pref_title_duration">表示時間</string>
+    <string name="pref_description_duration">時計を表示する長さを指定します。</string>
+    <string name="pref_title_fadeout">フェードアウトする</string>
+    <string name="pref_title_date_format">日付形式</string>
+    <string name="pref_title_text_size">文字サイズ</string>
+    <string name="pref_title_dark_mode">ダークモードを使用する</string>
+</resources>
