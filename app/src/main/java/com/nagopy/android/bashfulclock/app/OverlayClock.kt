@@ -31,29 +31,28 @@ class OverlayClock @Inject constructor(
     private val binding: OverlayClockBinding = OverlayClockBinding.inflate(LayoutInflater.from(context)).apply {
         when (userSettings.textSize) {
             userSettings.textSizeSmall ->
-                TextViewCompat.setTextAppearance(this.clockTextView,
-                    R.style.TextAppearance_AppCompat_Small
-                )
+                TextViewCompat.setTextAppearance(this.clockTextView, R.style.TextAppearance_AppCompat_Small)
             userSettings.textSizeMedium ->
-                TextViewCompat.setTextAppearance(this.clockTextView,
-                    R.style.TextAppearance_AppCompat_Medium
-                )
+                TextViewCompat.setTextAppearance(this.clockTextView, R.style.TextAppearance_AppCompat_Medium)
             userSettings.textSizeLarge ->
-                TextViewCompat.setTextAppearance(this.clockTextView,
-                    R.style.TextAppearance_AppCompat_Large
-                )
+                TextViewCompat.setTextAppearance(this.clockTextView, R.style.TextAppearance_AppCompat_Large)
             userSettings.textSizeExtraLarge -> {
-                TextViewCompat.setTextAppearance(this.clockTextView,
-                    R.style.TextAppearance_AppCompat_Large
-                )
+                TextViewCompat.setTextAppearance(this.clockTextView, R.style.TextAppearance_AppCompat_Large)
                 // getTextSize = px
                 // setTextSize = sp(default)
                 // this.clockTextView.textSize *= 1.1f NG!
                 this.clockTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, this.clockTextView.textSize * 1.1f)
             }
         }
-        this.clockTextView.setTextColor(Color.WHITE)
+        if (userSettings.darkMode) {
+            this.clockTextView.setBackgroundColor(Color.BLACK)
+            this.clockTextView.setTextColor(Color.WHITE)
+        } else {
+            this.clockTextView.setBackgroundColor(Color.WHITE)
+            this.clockTextView.setTextColor(Color.BLACK)
+        }
     }
+
     private val clockView: OverlayView<View> = overlayViewManager.newOverlayView(binding.root).apply {
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT)
         setHeight(ViewGroup.LayoutParams.WRAP_CONTENT)

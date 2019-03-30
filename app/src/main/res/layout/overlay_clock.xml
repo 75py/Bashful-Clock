@@ -16,11 +16,11 @@
                 android:id="@+id/clockTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/black"
+                tools:background="@android:color/black"
                 android:gravity="center"
                 android:padding="8dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@android:color/white"
+                tools:textColor="@android:color/white"
                 android:text="@{text}"
                 tools:text="2018/10/01 12:34:56"/>
 

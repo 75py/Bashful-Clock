@@ -97,4 +97,12 @@ class UserSettingsImplTest {
     @Test
     fun setY() {
     }
+
+    @Test
+    fun getDarkMode() {
+        Assert.assertThat(userSettings.darkMode, CoreMatchers.`is`(false))
+
+        sp.edit().putBoolean(res.getString(R.string.pref_key_dark_mode), true).commit()
+        Assert.assertThat(userSettings.darkMode, CoreMatchers.`is`(true))
+    }
 }

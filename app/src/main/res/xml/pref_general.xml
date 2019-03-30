@@ -39,4 +39,10 @@
         android:title="@string/pref_title_text_size"
         app:iconSpaceReserved="false" />
 
+    <SwitchPreference
+            android:defaultValue="@bool/pref_default_value_dark_mode"
+            android:key="@string/pref_key_dark_mode"
+            android:title="@string/pref_title_dark_mode"
+            app:iconSpaceReserved="false" />
+
 </PreferenceScreen>

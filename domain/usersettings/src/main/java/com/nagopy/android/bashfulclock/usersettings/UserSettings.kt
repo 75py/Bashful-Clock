@@ -20,6 +20,8 @@ interface UserSettings {
 
     val textSizeExtraLarge: String
 
+    val darkMode: Boolean
+
     fun isUserSettingsKey(key: String?): Boolean
 
     var y: Int

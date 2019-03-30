@@ -46,8 +46,14 @@ class UserSettingsImpl @Inject constructor(
     override val textSizeLarge: String = resources.getString(R.string.pref_entryValues_text_size_large)
     override val textSizeExtraLarge: String = resources.getString(R.string.pref_entryValues_text_size_xlarge)
 
+
+    private val keyDarkMode = resources.getString(R.string.pref_key_dark_mode)
+    private val defValueDarkMode = resources.getBoolean(R.bool.pref_default_value_dark_mode)
+    override val darkMode: Boolean
+        get() = sharedPreferences.getBoolean(keyDarkMode, defValueDarkMode)
+
     override fun isUserSettingsKey(key: String?) = when (key) {
-        keyInEnglish, keyDuration, keyFadeOut, keyDateFormat, keyTextSize -> true
+        keyInEnglish, keyDuration, keyFadeOut, keyDateFormat, keyTextSize, keyDarkMode -> true
         else -> false
     }
 
