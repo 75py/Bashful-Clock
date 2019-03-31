@@ -79,7 +79,6 @@ object UserSettingsComponentModule {
 object DateStrComponentModule {
     @JvmStatic
     @Provides
-    @Singleton
     fun provideDateFormatter(
         context: Context,
         userSettings: UserSettings,
