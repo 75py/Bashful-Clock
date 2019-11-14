@@ -30,6 +30,7 @@ android:
 branches:
   only:
     - master
+    - develop
     - "/^v?[0-9\\.]+/"
 
 before_install:
