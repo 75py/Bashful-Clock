@@ -85,10 +85,14 @@ deploygate {
     apiToken = System.getenv('DEPLOYGATE_API_TOKEN')
 
     deployments {
+        def hash = "git rev-parse --short HEAD".execute([], project.rootDir).in.text.trim()
+
         devUniversalApkOfAab {
+            message = "${hash}"
             sourceFile = file("${project.rootDir}/app/build/from-aab/app-dev-release-universal.apk")
         }
         proUniversalApkOfAab {
+            message = "${hash}"
             sourceFile = file("${project.rootDir}/app/build/from-aab/app-pro-release-universal.apk")
         }
     }
