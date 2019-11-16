@@ -27,7 +27,7 @@ readonly temp_dir=$(mktempdir)
 
 trap "rm -fr ${temp_dir}" ERR 1 2 3 1
 
-: "${BUNDLE_TOOL_VERSION:=0.8.0}"
+: "${BUNDLE_TOOL_VERSION:=0.11.0}"
 
 readonly bundle_file_path="$1"
 readonly save_to="$2"
