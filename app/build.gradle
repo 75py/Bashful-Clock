@@ -81,14 +81,48 @@ android {
 }
 
 deploygate {
-    userName = System.getenv('DEPLOYGATE_USER_NAME')
-    token = System.getenv('DEPLOYGATE_API_TOKEN')
+    appOwnerName = System.getenv('DEPLOYGATE_USER_NAME')
+    apiToken = System.getenv('DEPLOYGATE_API_TOKEN')
 
-    apks {
-        debug {
-            def hash = 'git log -1 --oneline'.execute([], project.rootDir).in.text.trim()
-            message = hash
+    deployments {
+        def hash = "git rev-parse --short HEAD".execute([], project.rootDir).in.text.trim()
+
+        devUniversalApkOfAab {
+            message = "${hash}"
+            sourceFile = file("${project.rootDir}/app/build/from-aab/app-dev-release-universal.apk")
         }
+        proUniversalApkOfAab {
+            message = "${hash}"
+            sourceFile = file("${project.rootDir}/app/build/from-aab/app-pro-release-universal.apk")
+        }
+    }
+}
+
+def buildDevUniversalApk = project.tasks.create("buildDevUniversalApk", DefaultTask.class) {
+    dependsOn("bundleDevRelease")
+    doLast {
+        def proc = [
+                "${rootProject.projectDir}/bundle_universal_apk.bash",
+                "app/build/outputs/bundle/devRelease/app-dev-release.aab",
+                "app/build/from-aab/app-dev-release-universal.apk",
+                "--ks",
+                "${android.signingConfigs.release.storeFile.getAbsolutePath()}",
+                "--ks-key-alias",
+                "${android.signingConfigs.release.keyAlias}",
+                "--ks-pass",
+                "pass:${android.signingConfigs.release.storePassword}",
+                "--key-pass",
+                "pass:${android.signingConfigs.release.keyPassword}"
+        ].execute([], rootProject.projectDir)
+        if (proc.waitFor() != 0) {
+            throw new IllegalStateException(proc.err.text)
+        }
+    }
+}
+
+project.afterEvaluate {
+    project.tasks.named("uploadDeployGateDevUniversalApkOfAab").configure { dgTask ->
+        dgTask.dependsOn(buildDevUniversalApk)
     }
 }
 
