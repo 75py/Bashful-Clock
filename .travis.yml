@@ -46,7 +46,7 @@ script:
   - ./gradlew assembleDevRelease testDevRelease
 
 after_success:
-  - ./gradlew uploadDeployGateDevRelease
+  - ./gradlew uploadDeployGateDevUniversalApkOfAab
 
 deploy:
   skip_cleanup: true
