@@ -43,7 +43,7 @@ platform :android do
   desc "Deploy a new version to the Google Play (Alpha track)"
   lane :deploy_alpha do
     gradle(task: "bundleProRelease")
-    upload_to_play_store(track: 'alpha', aab_paths:["app/build/outputs/bundle/proRelease/app-pro-release.aab"])
+    upload_to_play_store(track: 'alpha', skip_upload_apk: true, aab_paths:["app/build/outputs/bundle/proRelease/app-pro-release.aab"])
   end
 
   # You can define as many lanes as you want
